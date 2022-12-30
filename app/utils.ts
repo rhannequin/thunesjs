@@ -3,6 +3,8 @@ import { useMemo } from "react"
 
 import type { User } from "~/models/user.server"
 
+import currency from "currency.js"
+
 const DEFAULT_REDIRECT = "/"
 
 /**
@@ -68,4 +70,18 @@ export function useUser(): User {
 
 export function validateEmail(email: unknown): email is string {
   return typeof email === "string" && email.length > 3 && email.includes("@")
+}
+
+export function money(
+  amount: number,
+  cur: string,
+  fromCents: boolean = true,
+): string {
+  const symbols: { [key: string]: string } = {
+    EUR: "€",
+  }
+  return currency(amount, {
+    symbol: symbols[cur],
+    fromCents: fromCents,
+  }).format()
 }
