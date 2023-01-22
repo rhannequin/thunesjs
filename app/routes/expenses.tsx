@@ -1,28 +1,11 @@
-import { Form, Link } from "@remix-run/react"
 import { json } from "@remix-run/node"
-import { useLoaderData } from "@remix-run/react"
+import { Form, Link, useLoaderData } from "@remix-run/react"
 
+import { getExpenses } from "~/models/expense.server"
 import { useUser, money } from "~/utils"
 
 export const loader = async () => {
-  return json({
-    expenses: [
-      {
-        id: 1,
-        title: "Restaurant",
-        amount: 3540,
-        currency: "EUR",
-        date: "2022-12-15",
-      },
-      {
-        id: 2,
-        title: "Groceries",
-        amount: 1256,
-        currency: "EUR",
-        date: "2022-12-17",
-      },
-    ],
-  })
+  return json({ expenses: await getExpenses() })
 }
 
 export default function ExpensesPage() {

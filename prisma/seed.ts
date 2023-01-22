@@ -40,6 +40,26 @@ async function seed() {
     },
   })
 
+  await prisma.expense.create({
+    data: {
+      title: "Restaurant",
+      amount: 3540,
+      currency: "EUR",
+      date: "2022-12-15",
+      userId: user.id,
+    },
+  })
+
+  await prisma.expense.create({
+    data: {
+      title: "Groceries",
+      amount: 1256,
+      currency: "EUR",
+      date: "2022-12-17",
+      userId: user.id,
+    },
+  })
+
   console.log(`Database has been seeded. 🌱`)
 }
 
